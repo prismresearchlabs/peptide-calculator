@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Peptide Calculator: Reconstitution and U-100 Syringe Units</title>
+<meta name="description" content="Free peptide reconstitution calculator. Enter the vial size, the water added and the amount you want, and get the concentration and the units to draw on a U-100 syringe. Open source.">
+<link rel="canonical" href="https://prismresearchlabs.github.io/peptide-calculator/">
+<style>
+  :root { --bg: #f7f8fa; --card: #fff; --ink: #14171c; --muted: #5b6472; --line: #dfe3e8; --accent: #1f5eff; }
+  @media (prefers-color-scheme: dark) { :root { --bg: #0f1115; --card: #171a21; --ink: #eef1f5; --muted: #9aa3b2; --line: #2a2f3a; --accent: #7aa2ff; } }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+  main { max-width: 760px; margin: 0 auto; padding: 32px 16px 56px; }
+  h1 { font-size: 1.9rem; line-height: 1.2; margin: 0 0 8px; }
+  h2 { font-size: 1.25rem; margin: 36px 0 10px; }
+  p.lead { color: var(--muted); margin: 0 0 24px; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 20px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; }
+  label { display: block; font-size: .85rem; color: var(--muted); margin-bottom: 4px; }
+  input, select { width: 100%; padding: 10px 12px; font-size: 1rem; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); color: var(--ink); }
+  .out { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin-top: 18px; }
+  .stat { border-top: 1px solid var(--line); padding-top: 10px; }
+  .stat b { display: block; font-size: 1.5rem; }
+  .stat span { color: var(--muted); font-size: .85rem; }
+  table { width: 100%; border-collapse: collapse; font-size: .92rem; }
+  th, td { text-align: left; padding: 8px 6px; border-bottom: 1px solid var(--line); }
+  th { color: var(--muted); font-weight: 600; }
+  .scroll { overflow-x: auto; }
+  a { color: var(--accent); }
+  footer { margin-top: 40px; color: var(--muted); font-size: .85rem; }
+  code { background: var(--card); border: 1px solid var(--line); border-radius: 4px; padding: 1px 5px; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Peptide calculator</h1>
+  <p class="lead">Enter the vial size, the water you add and the amount you want. The calculator gives the concentration and the units to draw on a U-100 insulin syringe. It runs in your browser and stores nothing.</p>
+
+  <div class="card">
+    <div class="grid">
+      <div><label for="vial">Peptide in the vial (mg)</label><input id="vial" type="number" min="0" step="any" value="10"></div>
+      <div><label for="water">Water added (mL)</label><input id="water" type="number" min="0" step="any" value="2"></div>
+      <div><label for="amount">Amount wanted</label><input id="amount" type="number" min="0" step="any" value="250"></div>
+      <div><label for="unit">Amount unit</label><select id="unit"><option value="mcg" selected>mcg</option><option value="mg">mg</option></select></div>
+    </div>
+    <div class="out" aria-live="polite">
+      <div class="stat"><b id="conc">–</b><span>Concentration (mg/mL)</span></div>
+      <div class="stat"><b id="perUnit">–</b><span>mcg per unit (0.01 mL)</span></div>
+      <div class="stat"><b id="units">–</b><span>Units to draw (U-100)</span></div>
+      <div class="stat"><b id="ml">–</b><span>Volume (mL)</span></div>
+    </div>
+  </div>
+
+  <h2>How the math works</h2>
+  <p>Concentration is the milligrams in the vial divided by the millilitres of water: <code>mg/mL = vial mg ÷ water mL</code>. One unit on a U-100 syringe is 0.01 mL, so each unit holds <code>mg/mL × 10</code> micrograms. To find the units for an amount, divide the amount in milligrams by the concentration and multiply by 100: <code>units = (amount mg ÷ mg/mL) × 100</code>.</p>
+  <p>Example: 10 mg mixed with 2 mL of water is 5 mg/mL, so each unit holds 50 mcg and 250 mcg is 5 units.</p>
+
+  <h2>Reconstitution chart</h2>
+  <div class="scroll">
+    <table id="chart"><thead><tr><th>Vial</th><th>1 mL water</th><th>2 mL water</th><th>3 mL water</th></tr></thead><tbody></tbody></table>
+  </div>
+  <p style="color:var(--muted);font-size:.9rem">Each cell shows the concentration and the micrograms in one unit.</p>
+
+  <h2>More guides</h2>
+  <ul>
+    <li><a href="https://www.prismlabs.store/reconstitution-calculator">Peptide calculator with a dose chart</a> (Prism Labs)</li>
+    <li><a href="https://www.prismlabs.store/articles/how-to-reconstitute-peptides">How to reconstitute peptides: 7 steps</a></li>
+    <li><a href="https://www.prismlabs.store/articles/how-to-read-a-peptide-coa">How to read a peptide certificate of analysis</a></li>
+    <li><a href="https://www.prismlabs.store/articles/bacteriostatic-vs-sterile-water">Bacteriostatic vs sterile water</a></li>
+  </ul>
+
+  <footer>
+    <p>Math only. This page does not choose an amount for you and is not medical advice. For laboratory research use only.</p>
+    <p>Open source (MIT). Maintained by <a href="https://www.prismlabs.store">Prism Labs</a>, a US supplier of research peptides with a third-party lab report for every lot. <a href="https://github.com/prismresearchlabs/peptide-calculator">Source on GitHub</a>.</p>
+  </footer>
+</main>
+<script>
+  const $ = (id) => document.getElementById(id);
+  const fmt = (n, d = 2) => Number.isFinite(n) ? Number(n.toFixed(d)).toLocaleString() : '–';
+  function calc() {
+    const vial = parseFloat($('vial').value), water = parseFloat($('water').value);
+    const amount = parseFloat($('amount').value), mg = $('unit').value === 'mcg' ? amount / 1000 : amount;
+    const conc = vial > 0 && water > 0 ? vial / water : NaN;
+    $('conc').textContent = fmt(conc, 3);
+    $('perUnit').textContent = fmt(conc * 10, 1);
+    const ml = mg > 0 ? mg / conc : NaN;
+    $('ml').textContent = fmt(ml, 3);
+    $('units').textContent = fmt(ml * 100, 1);
+  }
+  ['vial', 'water', 'amount', 'unit'].forEach((id) => $(id).addEventListener('input', calc));
+  calc();
+  const body = document.querySelector('#chart tbody');
+  [5, 10, 20, 30, 50, 100].forEach((mg) => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `<td>${mg} mg</td>` + [1, 2, 3].map((ml) => { const c = mg / ml; return `<td>${fmt(c, 2)} mg/mL · ${fmt(c * 10, 1)} mcg/unit</td>`; }).join('');
+    body.appendChild(tr);
+  });
+</script>
+</body>
+</html>
