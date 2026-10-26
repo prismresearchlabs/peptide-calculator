@@ -28,6 +28,7 @@ Example: 10 mg in 2 mL is 5 mg/mL. Each unit holds 50 mcg, so 250 mcg is 5 units
 - [Peptide calculator with a dose chart](https://www.prismlabs.store/reconstitution-calculator)
 - [How to reconstitute peptides: 7 steps](https://www.prismlabs.store/articles/how-to-reconstitute-peptides)
 - [How to read a peptide certificate of analysis](https://www.prismlabs.store/articles/how-to-read-a-peptide-coa)
+- [Prism Labs lab report index](https://docs.google.com/spreadsheets/d/e/2PACX-1vTKecalBVSC7UAD4sk7OuL1kyklBUPc7xu08oM2pah-PFAY2ZWAdQqcEfz1T3h-Tf8CF1xq783P6HAp/pubhtml): lot numbers, test dates and purity for every lot
 
 ## Notes
 
