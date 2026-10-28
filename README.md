@@ -4,6 +4,8 @@ A free, open-source peptide reconstitution calculator. Enter the vial size (mg),
 
 **Live page:** https://prismresearchlabs.github.io/peptide-calculator/
 
+**Chrome extension:** [Peptide Calculator on the Chrome Web Store](https://chromewebstore.google.com/detail/peptide-calculator-recons/aeodgnglneggbkahjhdicdpogcffppie)
+
 ## The math
 
 - Concentration: `mg/mL = vial mg ÷ water mL`
